@@ -46,7 +46,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == 0 || section == 1) {
         return 2;
     }
     
@@ -72,9 +72,16 @@
     }
     
     if (indexPath.section == 1) {
-        cell.imgIcon.image = [UIImage imageNamed:@"table_entrance.png"];
-        cell.lblTitle.text = @"注销";
-        cell.lblValue.text = @"";
+        if (indexPath.row == 0) {
+            cell.imgIcon.image = [UIImage imageNamed:@"arrow-small-27"];
+            cell.lblTitle.text = @"更新分类";
+            cell.lblValue.text = @"";
+        }
+        if (indexPath.row == 1) {
+            cell.imgIcon.image = [UIImage imageNamed:@"table_entrance.png"];
+            cell.lblTitle.text = @"注销";
+            cell.lblValue.text = @"";
+        }
     }
     
     if (indexPath.section == 2) {
@@ -89,10 +96,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        [DAConfigManager.defaults removeObjectForKey:kConfigManagerUserID];
-        [DAConfigManager.defaults removeObjectForKey:kConfigManagerCookie];
-        [DAConfigManager.defaults removeObjectForKey:kConfigManagerCsrfToken];
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kNotificationNameNeedsLogin object:nil]];
+        if (indexPath.row == 0) {
+            [ABHelper fetchTag:^(){
+                [ABHelper showInfo:@"更新成功"];
+            }];
+        }
+        if (indexPath.row == 1) {
+            [DAConfigManager.defaults removeObjectForKey:kConfigManagerUserID];
+            [DAConfigManager.defaults removeObjectForKey:kConfigManagerCookie];
+            [DAConfigManager.defaults removeObjectForKey:kConfigManagerCsrfToken];
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kNotificationNameNeedsLogin object:nil]];
+        }
     }
 }
 

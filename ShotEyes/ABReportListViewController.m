@@ -15,6 +15,7 @@
 {
     NSArray *list;
     NSMutableArray *taglist;
+    UIRefreshControl    *refresh;
 }
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barTag;
 - (IBAction)onCategoryClicked:(id)sender;
@@ -34,8 +35,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 获取数据
     [self fetchList];
     
+    // 初始化菜单
     TagList *tags = [DAStorable loadByKey:kStorableKeyTagList];
     if (tags == nil) {
         
@@ -48,6 +52,12 @@
         // 初始化Tag菜单
         [self initMenu:tags.items];
     }
+    
+    // 下拉Table时显示的转圈控件
+    refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(fetchList) forControlEvents:UIControlEventValueChanged];
+    [self.tblShotList addSubview:refresh];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,6 +84,12 @@
     cell.txtTitle.text = shot.title;
     cell.txtMessage.text = shot.message;
     
+    NSString *tagList = @"";
+    for (NSString *tag in shot.tag) {
+        tagList = [NSString stringWithFormat:@"%@, %@", tagList, tag];
+    }
+    cell.txtTag.text = tagList;
+    
     NSString *url = [ABHelper url:[@"/file/" stringByAppendingString:shot.image] params:nil];
     [cell.imgShot sd_setImageWithURL:[NSURL URLWithString:url]
                     placeholderImage:[UIImage imageNamed:@"noimage.png"]
@@ -91,15 +107,18 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSString *params = [self.barTag.title isEqualToString:kTagALL] ? nil : [NSString stringWithFormat:@"tag=%@", self.barTag.title];
+    NSString *params = [self.barTag.title isEqualToString:kTagALL] ? nil : [NSString stringWithFormat:@"tag=%@", [ABHelper encode:self.barTag.title]];
     [manager GET:[ABHelper url:@"/shot/list" params:params]
       parameters:nil
          success:^(NSURLSessionDataTask *task, id responseObject) {
              ShotList *tagList = [[ShotList alloc] initWithDictionary:responseObject[@"data"]];
              list = tagList.items;
+             
              [self.tblShotList reloadData];
+             [refresh endRefreshing];
          } failure:^(NSURLSessionDataTask *task, NSError *error) {
              NSLog(@"Error: %@", error);
+             [refresh endRefreshing];
              [ABHelper showError:error.description];
          }];
 }

@@ -9,6 +9,8 @@
 #import "ABReportViewController.h"
 #import "ABCommentViewController.h"
 
+#define kTagNone @"选择分类"
+
 @interface ABReportViewController ()
 {
     NSMutableArray *taglist;
@@ -123,7 +125,8 @@
                                                                parameters:nil
                                                 constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                    
-                                                    [formData appendPartWithFileData:UIImageJPEGRepresentation(self.imgAttach.image, 1.0)
+                                                    // TODO: 根据大小调整缩放比例
+                                                    [formData appendPartWithFileData:UIImageJPEGRepresentation(self.imgAttach.image, 0.2)
                                                                                 name:@"IOS"
                                                                             fileName:@"IOS_PICTURE.JPG"
                                                                             mimeType:@"image/jpeg"];
@@ -156,10 +159,11 @@
     [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:@"" parameters:nil error:nil];
     
     // 生成参数
+    NSArray *tag = [self.barTag.title isEqualToString:kTagNone] ? @[@""] : @[self.barTag.title];
     NSDictionary *content = @{ @"title": title,
                                @"message": message,
                                @"image": image,
-                               @"tag": @[self.barTag.title]};
+                               @"tag": tag};
     NSDictionary *data = @{ @"data": content };
     
     // 上传
@@ -201,7 +205,7 @@
     self.imgAttach.image = image;
     self.imgAttach.isImageSelected = YES;
     
-    [DAStorable store:image withKey:kStorableKeyOriginalImage];
+    [DAStorable store:self.imgAttach.image withKey:kStorableKeyOriginalImage];
 }
 
 - (IBAction)firstViewReturnActionForSegue:(UIStoryboardSegue *)segue
