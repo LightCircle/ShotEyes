@@ -29,14 +29,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // 注册登陆页面的显示
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(notificationShowLogin:) name:@"NeedsLogin" object:nil];
-
+    [nc addObserver:self selector:@selector(notificationShowLogin:) name:kNotificationNameNeedsLogin object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"NeedsLogin" object:nil]];
+    NSString *user = [DAConfigManager.defaults objectForKey:kConfigManagerUserID];
+    if (user == nil) {
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kNotificationNameNeedsLogin object:nil]];
+    }
     [super viewDidAppear:animated];
 }
 
@@ -57,13 +60,12 @@
 }
 */
 
-// 接受通知
+// 处理未登录通知
 - (void)notificationShowLogin:(NSNotification*)note
 {
     // TODO: 动画显示
     ABLoginViewController *loginViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"ABLoginViewController"];
     
-//    ABLoginViewController *loginViewController = [[ABLoginViewController alloc]initWithNibName:@"DALoginViewController" bundle:nil];
     [loginViewController.view setFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height)];
     [self addChildViewController:loginViewController];
     [self.view addSubview:loginViewController.view];

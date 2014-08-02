@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ABHeader.h"
 
 @interface ABSettingViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITableView *tblSetting;
-
 @end

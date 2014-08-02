@@ -89,6 +89,7 @@
 		F2383DAF1987FBE500527F44 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2383D8E1987FBE500527F44 /* UIKit.framework */; };
 		F2383DB71987FBE500527F44 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2383DB51987FBE500527F44 /* InfoPlist.strings */; };
 		F2383DB91987FBE500527F44 /* ShotEyesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2383DB81987FBE500527F44 /* ShotEyesTests.m */; };
+		F25EEBA5198CA53B000DBD89 /* ABHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F25EEBA4198CA53B000DBD89 /* ABHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,7 @@
 		F20BA1FB198C91C3003EE65C /* arrow-simple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-simple.png"; sourceTree = "<group>"; };
 		F20BA1FC198C91C3003EE65C /* arrow-simple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-simple@2x.png"; sourceTree = "<group>"; };
 		F20BA1FF198C94B3003EE65C /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
+		F20BA201198C9ABB003EE65C /* ABHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHeader.h; sourceTree = "<group>"; };
 		F2383D871987FBE500527F44 /* ShotEyes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShotEyes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2383D8A1987FBE500527F44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F2383D8C1987FBE500527F44 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -201,6 +203,8 @@
 		F2383DB41987FBE500527F44 /* ShotEyesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShotEyesTests-Info.plist"; sourceTree = "<group>"; };
 		F2383DB61987FBE500527F44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F2383DB81987FBE500527F44 /* ShotEyesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShotEyesTests.m; sourceTree = "<group>"; };
+		F25EEBA3198CA53B000DBD89 /* ABHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABHelper.h; sourceTree = "<group>"; };
+		F25EEBA4198CA53B000DBD89 /* ABHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,25 +364,28 @@
 				F20BA13E19895F32003EE65C /* Images */,
 				F20BA1391988038B003EE65C /* Entities */,
 				F2383D911987FBE500527F44 /* Supporting Files */,
+				F20BA201198C9ABB003EE65C /* ABHeader.h */,
+				F25EEBA3198CA53B000DBD89 /* ABHelper.h */,
+				F25EEBA4198CA53B000DBD89 /* ABHelper.m */,
 				F2383D991987FBE500527F44 /* ABAppDelegate.h */,
 				F2383D9A1987FBE500527F44 /* ABAppDelegate.m */,
+				F20BA1E1198B2CCF003EE65C /* ABMainViewController.h */,
+				F20BA1E2198B2CCF003EE65C /* ABMainViewController.m */,
 				F2383D9C1987FBE500527F44 /* Main_iPhone.storyboard */,
 				F2383D9F1987FBE500527F44 /* Main_iPad.storyboard */,
 				F2383DA51987FBE500527F44 /* Images.xcassets */,
+				F20BA19E198A59D5003EE65C /* ABLoginViewController.h */,
+				F20BA19F198A59D5003EE65C /* ABLoginViewController.m */,
 				F20BA195198A579D003EE65C /* ABReportViewController.h */,
 				F20BA196198A579D003EE65C /* ABReportViewController.m */,
+				F20BA1C4198A9E1A003EE65C /* ABCanvasImageView.h */,
+				F20BA1C5198A9E1A003EE65C /* ABCanvasImageView.m */,
 				F20BA1C1198A8890003EE65C /* ABCommentViewController.h */,
 				F20BA1C2198A8890003EE65C /* ABCommentViewController.m */,
 				F20BA198198A57C2003EE65C /* ABReportListViewController.h */,
 				F20BA199198A57C2003EE65C /* ABReportListViewController.m */,
 				F20BA1BA198A76FC003EE65C /* ABReportListViewCell.h */,
 				F20BA1BB198A76FC003EE65C /* ABReportListViewCell.m */,
-				F20BA19E198A59D5003EE65C /* ABLoginViewController.h */,
-				F20BA19F198A59D5003EE65C /* ABLoginViewController.m */,
-				F20BA1C4198A9E1A003EE65C /* ABCanvasImageView.h */,
-				F20BA1C5198A9E1A003EE65C /* ABCanvasImageView.m */,
-				F20BA1E1198B2CCF003EE65C /* ABMainViewController.h */,
-				F20BA1E2198B2CCF003EE65C /* ABMainViewController.m */,
 				F20BA1E4198B91F7003EE65C /* ABSettingViewController.h */,
 				F20BA1E5198B91F7003EE65C /* ABSettingViewController.m */,
 				F20BA1E7198B9395003EE65C /* ABSettingViewCell.h */,
@@ -614,6 +621,7 @@
 				F20BA13D1988038B003EE65C /* Entities.m in Sources */,
 				F20BA1E6198B91F7003EE65C /* ABSettingViewController.m in Sources */,
 				F2383D9B1987FBE500527F44 /* ABAppDelegate.m in Sources */,
+				F25EEBA5198CA53B000DBD89 /* ABHelper.m in Sources */,
 				F20BA1BC198A76FC003EE65C /* ABReportListViewCell.m in Sources */,
 				F20BA1EE198BD4AD003EE65C /* KxMenu.m in Sources */,
 			);

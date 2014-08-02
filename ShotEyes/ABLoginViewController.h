@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ABHeader.h"
 
 @interface ABLoginViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITextField *txtUserID;
-@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
-- (IBAction)onLoginClicked:(id)sender;
-
 @end

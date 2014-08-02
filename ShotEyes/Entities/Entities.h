@@ -22,6 +22,8 @@
 
 @interface User : DAEntity
 @property (retain, nonatomic) NSString *_id;
+@property (retain, nonatomic) NSString *id;
+@property (retain, nonatomic) NSString *name;
 @property (retain, nonatomic) NSString *valid;
 @property (retain, nonatomic) NSString *createAt;
 @property (retain, nonatomic) NSString *createBy;

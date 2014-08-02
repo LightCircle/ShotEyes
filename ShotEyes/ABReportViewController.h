@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ABHeader.h"
 #import "ABCanvasImageView.h"
 
 @interface ABReportViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>

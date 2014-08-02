@@ -7,11 +7,13 @@
 //
 
 #import "ABLoginViewController.h"
-#import <AFHTTPSessionManager.h>
-#import "Entities.h"
-#import <DAConfigManager.h>
+
 
 @interface ABLoginViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *txtUserID;
+@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+- (IBAction)onLoginClicked:(id)sender;
 
 @end
 
@@ -21,7 +23,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -29,64 +30,84 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // 恢复过去输入过的用户ID
+    NSString *defaultUserID = [DAConfigManager.defaults objectForKey:kConfigManagerDefaultUserID];
+    if (defaultUserID != nil) {
+        self.txtUserID.text = defaultUserID;
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-
-#define kHTTPHeaderCookieName   @"Set-Cookie"
-#define kHTTPHeaderCsrftoken    @"csrftoken"
+#pragma mark - Custom Functions
 
 - (IBAction)onLoginClicked:(id)sender
 {
+    // 记住用户ID
+    [DAConfigManager.defaults setObject:self.txtUserID.text forKey:kConfigManagerDefaultUserID];
+    
+    if ([self isValid] == NO) {
+        return;
+    }
+    
+    [self login];
+}
+
+- (void)login
+{
+    // 登陆参数
+    NSString *params = [NSString stringWithFormat:@"name=%@&password=%@", self.txtUserID.text, self.txtPassword.text];
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-
-    [manager GET:@"http://10.0.1.18:5001/login?name=admin&password=admin"
+    [manager GET:[ABHelper url:@"/login" params:params]
       parameters:nil
          success:^(NSURLSessionDataTask *task, id responseObject) {
-
-             NSDictionary *aaa = responseObject[@"data"];
-             NSLog(@"responseObject: %@", [aaa objectForKey:@"createAt"]);
-
-             User *a = [[User alloc] initWithDictionary:aaa];
-
-             NSLog(@"responseObject: %@", a._id);
-
-             NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
-             NSLog(@"%@" ,[r allHeaderFields]);
              
+             NSDictionary *data = responseObject[@"data"];
              
-             NSString *cookie = [DAConfigManager.defaults objectForKey:kHTTPHeaderCookieName];
-             NSString *csrftoken = [DAConfigManager.defaults objectForKey:kHTTPHeaderCsrftoken];
-             NSLog(@"cookie: %@", cookie);
-             NSLog(@"csrftoken: %@", csrftoken);
-
-             [DAConfigManager.defaults setObject:[[r allHeaderFields] objectForKey:kHTTPHeaderCookieName] forKey:kHTTPHeaderCookieName];
-             [DAConfigManager.defaults setObject:[[r allHeaderFields] objectForKey:kHTTPHeaderCsrftoken] forKey:kHTTPHeaderCsrftoken];
+             // 保存登陆用户用户
+             User *user = [[User alloc] initWithDictionary:data];
+             [DAConfigManager.defaults setObject:user.id forKey:kConfigManagerUserID];
              
+             // 保存和cookie，csrftoken
+             NSDictionary *headerFields = [((NSHTTPURLResponse *)task.response) allHeaderFields];
+             [DAConfigManager.defaults setObject:[headerFields objectForKey:kConfigManagerCookie] forKey:kHTTPHeaderCookieName];
+             [DAConfigManager.defaults setObject:[headerFields objectForKey:kConfigManagerCsrfToken] forKey:kHTTPHeaderCsrftokenName];
+             
+             // 关闭登陆画面
              [self.view removeFromSuperview];
-
          } failure:^(NSURLSessionDataTask *task, NSError *error) {
              
+             // 错误
              NSLog(@"Error: %@", error);
+             [ABHelper showError:error.description];
          }];
 }
+
+- (BOOL)isValid
+{
+    // 检证userId是否为空，去掉前后的半角和全角空格
+    NSString * userId = [self.txtUserID.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" 　" ]];
+    if (userId.length == 0) {
+        [ABHelper showError:@"请输入用户名"];
+        [self.txtUserID becomeFirstResponder];
+        return NO;
+    }
+    
+    // 检证password是否为空，去掉前后的半角和全角空格
+    NSString * password = [self.txtPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" 　" ]];
+    if ( password.length  == 0) {
+        [ABHelper showError:@"请输入密码"];
+        [self.txtPassword becomeFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

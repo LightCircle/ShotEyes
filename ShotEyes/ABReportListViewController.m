@@ -8,12 +8,6 @@
 
 #import "ABReportListViewController.h"
 #import "ABReportListViewCell.h"
-#import <UIImageView+WebCache.h>
-#import <DAConfigManager.h>
-#import <AFHTTPSessionManager.h>
-
-#define kHTTPHeaderCookieName   @"Set-Cookie"
-#define kHTTPHeaderCsrftoken    @"csrftoken"
 
 @interface ABReportListViewController ()
 {
