@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^ABCommentViewControllerComplet)(NSString *);
+typedef void (^ABCommentViewControllerComplet)(NSString *, NSString *);
 
 @interface ABCommentViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITextView *txtComment;
 @property (strong, nonatomic) ABCommentViewControllerComplet onComplet;
-
+@property (strong, nonatomic) NSString *text;
+@property (strong, nonatomic) NSString *message;
 @end

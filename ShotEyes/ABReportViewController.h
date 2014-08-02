@@ -11,12 +11,4 @@
 #import "ABCanvasImageView.h"
 
 @interface ABReportViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-
-- (IBAction)onPhotoLibraryClicked:(id)sender;
-- (IBAction)onCameraClicked:(id)sender;
-- (IBAction)onRefreshClicked:(id)sender;
-- (IBAction)onReportClicked:(id)sender;
-@property (weak, nonatomic) IBOutlet ABCanvasImageView *imgAttach;
-- (IBAction)onCategoryClicked:(id)sender;
-
 @end

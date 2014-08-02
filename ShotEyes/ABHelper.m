@@ -7,6 +7,7 @@
 //
 
 #import "ABHelper.h"
+#import "ABHeader.h"
 
 @implementation ABHelper
 
@@ -19,14 +20,70 @@
                       otherButtonTitles:nil, nil] show];
 }
 
++ (void)showInfo:(NSString *)message
+{
+    [[[UIAlertView alloc] initWithTitle:@""
+                                message:message
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
+}
+
 + (NSString *) url:(NSString *)path params:(NSString *)params
 {
     // TODO: get from define
-    NSString *host = @"10.0.1.18";
-    NSString *port = @"5001";
+    NSString *host = [DAConfigManager.defaults objectForKey:kConfigManagerServerName];
+    NSString *port = [DAConfigManager.defaults objectForKey:kConfigManagerServerPort];
     
-    // http://10.0.1.18:5001/login?name=admin&password=admin
-    return [NSString stringWithFormat:@"http://%@:%@%@?%@", host, port, path, params];
+    NSString *url = [NSString stringWithFormat:@"http://%@:%@%@", host, port, path];
+    if (params) {
+        url = [NSString stringWithFormat:@"http://%@:%@%@?%@", host, port, path, params];
+    }
+
+    return url;
+}
+
++ (NSString *) urlWithToken:(NSString *)path params:(NSString *)params
+{
+    // TODO: get from define
+    NSString *host = [DAConfigManager.defaults objectForKey:kConfigManagerServerName];
+    NSString *port = [DAConfigManager.defaults objectForKey:kConfigManagerServerPort];
+    NSString *token = [ABHelper encode:[DAConfigManager.defaults objectForKey:kConfigManagerCsrfToken]];
+
+    NSString *url = [NSString stringWithFormat:@"http://%@:%@%@?_csrf=%@", host, port, path, token];
+    if (params) {
+        url = [[url stringByAppendingString:@"&"] stringByAppendingString:params];
+    }
+    
+    return url;
+}
+
++ (NSString*) encode:(NSString *)string
+{
+    return (__bridge_transfer NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                (__bridge CFStringRef)string,
+                                                                                NULL,
+                                                                                (CFStringRef)@"!*'();:@&=+$,./?%#[]",
+                                                                                kCFStringEncodingUTF8);
+}
+
++ (void)fetchTag:(void (^)())callback
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager GET:[ABHelper url:@"/tag/list" params:nil]
+      parameters:nil
+         success:^(NSURLSessionDataTask *task, id responseObject) {
+             
+             TagList *tagList = [[TagList alloc] initWithDictionary:responseObject[@"data"]];
+             [DAStorable store:tagList withKey:kStorableKeyTagList];
+             if (callback) {
+                 callback();
+             }
+         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+             NSLog(@"Error: %@", error);
+             [ABHelper showError:error.description];
+         }];
 }
 
 @end

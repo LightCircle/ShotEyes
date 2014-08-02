@@ -62,12 +62,12 @@
         if (indexPath.row == 0) {
             cell.imgIcon.image = [UIImage imageNamed:@"table_satellite-dish.png"];
             cell.lblTitle.text = @"地址";
-            cell.lblValue.text = @"127.0.0.1";
+            cell.lblValue.text = [DAConfigManager.defaults objectForKey:kConfigManagerServerName];
         }
         if (indexPath.row == 1) {
             cell.imgIcon.image = [UIImage imageNamed:@"table_lightbulb.png"];
             cell.lblTitle.text = @"端口";
-            cell.lblValue.text = @"3000";
+            cell.lblValue.text = [DAConfigManager.defaults objectForKey:kConfigManagerServerPort];
         }
     }
     

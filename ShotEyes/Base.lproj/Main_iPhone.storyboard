@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcA-zL-U8f">
-                                <rect key="frame" x="60" y="68" width="25" height="25"/>
+                                <rect key="frame" x="72" y="68" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="image-7.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -27,7 +27,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fj-1b-EgK">
-                                <rect key="frame" x="285" y="68" width="25" height="25"/>
+                                <rect key="frame" x="277" y="68" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="cloud-upload-7.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,13 +37,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="注释" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yD-5S-nU5">
-                                <rect key="frame" x="175" y="89" width="25" height="21"/>
+                                <rect key="frame" x="184" y="89" width="25" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tF2-hA-nIE">
-                                <rect key="frame" x="10" y="68" width="25" height="25"/>
+                                <rect key="frame" x="13" y="68" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="11"/>
                                 <state key="normal" image="aperture-7.png"/>
@@ -52,19 +52,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="报告" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5D-VL-Paq">
-                                <rect key="frame" x="285" y="89" width="25" height="21"/>
+                                <rect key="frame" x="280" y="89" width="25" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-WG-XSY">
-                                <rect key="frame" x="10" y="89" width="25" height="21"/>
+                                <rect key="frame" x="16" y="89" width="25" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU5-mZ-T1c">
-                                <rect key="frame" x="175" y="68" width="25" height="25"/>
+                                <rect key="frame" x="181" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="write-7.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -74,13 +74,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="选择" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ah-Zy-2dO">
-                                <rect key="frame" x="58" y="89" width="25" height="21"/>
+                                <rect key="frame" x="75" y="89" width="25" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gz-fX-crL">
-                                <rect key="frame" x="235" y="68" width="25" height="25"/>
+                                <rect key="frame" x="228" y="68" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="arrow-reload-7.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -99,7 +99,11 @@
                                             <action selector="onCategoryClicked:" destination="19i-Yl-pbq" id="WuK-WV-ax0"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem image="arrow-simple.png" id="5X2-zT-zzL"/>
+                                    <barButtonItem image="arrow-simple.png" id="5X2-zT-zzL">
+                                        <connections>
+                                            <action selector="onCategoryClicked:" destination="19i-Yl-pbq" id="V2K-dX-4GS"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Wcw-Ww-W4M"/>
                                 </items>
                             </toolbar>
@@ -108,11 +112,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="noimage.png" translatesAutoresizingMaskIntoConstraints="NO" id="cVe-n3-Wzs" customClass="ABCanvasImageView">
-                                <rect key="frame" x="14" y="122" width="294" height="384"/>
+                                <rect key="frame" x="13" y="122" width="294" height="384"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="清除" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHQ-z1-fVd">
-                                <rect key="frame" x="235" y="89" width="25" height="21"/>
+                                <rect key="frame" x="231" y="89" width="25" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <nil key="highlightedColor"/>
@@ -122,6 +126,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="现场拍照" image="image.png" id="eAf-Vx-zVe"/>
                     <connections>
+                        <outlet property="barTag" destination="bIg-8f-x4I" id="pTY-t1-yVT"/>
                         <outlet property="imgAttach" destination="cVe-n3-Wzs" id="kyj-oC-JXJ"/>
                     </connections>
                 </viewController>
@@ -160,18 +165,26 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Ne-HR-9Tb">
-                                <rect key="frame" x="17" y="76" width="287" height="259"/>
+                                <rect key="frame" x="17" y="115" width="287" height="220"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="标题" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DzU-jU-8lR">
+                                <rect key="frame" x="17" y="77" width="287" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="MxB-E2-pga"/>
                     <connections>
                         <outlet property="txtComment" destination="2Ne-HR-9Tb" id="bpg-Ej-YNd"/>
+                        <outlet property="txtTitle" destination="DzU-jU-8lR" id="jfp-ie-Cqq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3a-9G-eZ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -216,8 +229,16 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="0N4-xC-q5t"/>
-                                    <barButtonItem title="全部" id="Iov-dE-Iiw"/>
-                                    <barButtonItem image="arrow-simple.png" id="AUI-m3-Vno"/>
+                                    <barButtonItem title="全部" id="Iov-dE-Iiw">
+                                        <connections>
+                                            <action selector="onCategoryClicked:" destination="5n3-Xp-nBN" id="SNT-P9-Qla"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="arrow-simple.png" id="AUI-m3-Vno">
+                                        <connections>
+                                            <action selector="onCategoryClicked:" destination="5n3-Xp-nBN" id="Lnv-ue-Yn1"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="HcY-bJ-97C"/>
                                 </items>
                             </toolbar>
@@ -286,6 +307,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="所有信息" image="photo-album.png" id="nxm-Bg-eIT"/>
                     <connections>
+                        <outlet property="barTag" destination="Iov-dE-Iiw" id="nC4-zX-Nfm"/>
                         <outlet property="tblShotList" destination="geb-hE-0Ny" id="MTG-r7-mfm"/>
                     </connections>
                 </viewController>

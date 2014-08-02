@@ -9,7 +9,8 @@
 #import "ABCommentViewController.h"
 
 @interface ABCommentViewController ()
-
+@property (weak, nonatomic) IBOutlet UITextField *txtTitle;
+@property (weak, nonatomic) IBOutlet UITextView *txtComment;
 @end
 
 @implementation ABCommentViewController
@@ -18,7 +19,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -26,29 +26,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self.txtComment becomeFirstResponder];
+    
+    self.txtTitle.text = self.text;
+    self.txtComment.text = self.message;
+    [self.txtTitle becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
     if (self.onComplet) {
-        self.onComplet(self.txtComment.text);
+        self.onComplet(self.txtTitle.text, self.txtComment.text);
     }
-    
-    NSLog(@"asdfasdf");
 }
 
 @end

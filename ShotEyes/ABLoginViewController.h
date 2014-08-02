@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ABHeader.h"
 
+typedef void (^ABLoginViewControllerComplet)();
+
 @interface ABLoginViewController : UIViewController
+@property (strong, nonatomic) ABLoginViewControllerComplet onComplet;
 @end

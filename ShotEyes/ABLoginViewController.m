@@ -76,8 +76,13 @@
              
              // 保存和cookie，csrftoken
              NSDictionary *headerFields = [((NSHTTPURLResponse *)task.response) allHeaderFields];
-             [DAConfigManager.defaults setObject:[headerFields objectForKey:kConfigManagerCookie] forKey:kHTTPHeaderCookieName];
-             [DAConfigManager.defaults setObject:[headerFields objectForKey:kConfigManagerCsrfToken] forKey:kHTTPHeaderCsrftokenName];
+             [DAConfigManager.defaults setObject:[headerFields objectForKey:kHTTPHeaderCookieName] forKey:kConfigManagerCookie];
+             [DAConfigManager.defaults setObject:[headerFields objectForKey:kHTTPHeaderCsrftokenName] forKey:kConfigManagerCsrfToken];
+             
+             // 设有回调函数，则调用
+             if (self.onComplet) {
+                 self.onComplet();
+             }
              
              // 关闭登陆画面
              [self.view removeFromSuperview];

@@ -10,6 +10,20 @@
 #import "ABCommentViewController.h"
 
 @interface ABReportViewController ()
+{
+    NSMutableArray *taglist;
+    NSString *title;
+    NSString *message;
+}
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barTag;
+@property (weak, nonatomic) IBOutlet ABCanvasImageView *imgAttach;
+
+- (IBAction)onPhotoLibraryClicked:(id)sender;
+- (IBAction)onCameraClicked:(id)sender;
+- (IBAction)onRefreshClicked:(id)sender;
+- (IBAction)onReportClicked:(id)sender;
+- (IBAction)onCategoryClicked:(id)sender;
 
 @end
 
@@ -19,7 +33,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -27,30 +40,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    // ペンの太さ、色
+    // 设定绘图笔颜色
     self.imgAttach.penBold = [NSNumber numberWithFloat:5.0f];
     self.imgAttach.penColor = [UIColor redColor];
+    
+    
+    TagList *list = [DAStorable loadByKey:kStorableKeyTagList];
+    if (list == nil) {
+        
+        // 如果没有缓存上，则获取后台数据
+        [ABHelper fetchTag:^(){
+            [self initMenu:list.items];
+        }];
+    } else {
+        
+        // 初始化Tag菜单
+        [self initMenu:list.items];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Custom Functions
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+// 选择图片
 - (IBAction)onPhotoLibraryClicked:(id)sender {
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     
@@ -61,28 +78,7 @@
     [self presentViewController:ipc animated:YES completion:nil];
 }
 
--(void)imagePickerController:(UIImagePickerController *)picker
-       didFinishPickingImage:(UIImage *)image
-                 editingInfo:(NSDictionary *)editingInfo
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    self.imgAttach.image = image;
-    self.imgAttach.isImageSelected = YES;
-    
-    [DAStorable store:image withKey:@"originalImage"];
-    
-//    [UIImageJPEGRepresentation(image, 1.0) writeToFile:[DAHelper documentPath:@"attach.jpg"] atomically:YES];
-//    imageUpdated = YES;
-//    _message.contentType = message_contenttype_image;
-//    self.btnClearImg.hidden = NO;
-//    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-//        _photoFromCamera = YES;
-//    } else {
-//        _photoFromCamera = NO;
-//    }
-//    [self renderButtons];
-}
-
+// 启动相机
 - (IBAction)onCameraClicked:(id)sender
 {
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
@@ -94,155 +90,154 @@
     [self presentViewController:ipc animated:YES completion:nil];
 }
 
+// 重置图片
 - (IBAction)onRefreshClicked:(id)sender
 {
-    self.imgAttach.image = [DAStorable loadByKey:@"originalImage"];
+    self.imgAttach.image = [DAStorable loadByKey:kStorableKeyOriginalImage];
 }
 
-#define kHTTPHeaderCsrftoken    @"csrftoken"
-- (NSString *)appendCsrf:(NSString *)path
+// 选择标签
+- (IBAction)onCategoryClicked:(id)sender
 {
-    NSString *csrftoken = [DAConfigManager.defaults objectForKey:kHTTPHeaderCsrftoken];
-
-    NSString *spliter = [path rangeOfString:@"?"].location == NSNotFound ? @"?" : @"&";
-    
-    return [NSString stringWithFormat:@"%@%@_csrf=%@", path, spliter, [self uriEncodeForString:csrftoken]];
+    [KxMenu showMenuInView:self.view
+                  fromRect:CGRectMake(0, 54, 320, 1)
+                 menuItems:taglist];
 }
 
-- (NSString*)uriEncodeForString:(NSString *)string {
-    return (__bridge_transfer NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                (__bridge CFStringRef)string,
-                                                                                NULL,
-                                                                                (CFStringRef)@"!*'();:@&=+$,./?%#[]",
-                                                                                kCFStringEncodingUTF8);
-}
-
+// 报告
 - (IBAction)onReportClicked:(id)sender
 {
-        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer]
-                                    multipartFormRequestWithMethod:@"POST"
-                                    URLString:[self appendCsrf:@"http://10.0.1.18:5001/file/upload"]
-                                    parameters:nil
-                                    constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                                       
-         NSData *jpegData = UIImageJPEGRepresentation(self.imgAttach.image, 1.0);
-        [formData appendPartWithFileData:jpegData
-                                    name:@"file"
-                                fileName:@"filename.jpg"
-                                mimeType:@"image/jpeg"];
-    } error:nil];
+    if ([self isValid] == NO) {
+        return;
+    }
+    
+    // TODO: 做成共同的上传
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSProgress *progress = nil;
+
+    // 生成上传用Request
+    AFHTTPRequestSerializer *serial = [AFHTTPRequestSerializer serializer];
+    NSMutableURLRequest *request = [serial multipartFormRequestWithMethod:@"POST"
+                                                                URLString:[ABHelper urlWithToken:@"/file/upload" params:nil]
+                                                               parameters:nil
+                                                constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                                   
+                                                    [formData appendPartWithFileData:UIImageJPEGRepresentation(self.imgAttach.image, 1.0)
+                                                                                name:@"IOS"
+                                                                            fileName:@"IOS_PICTURE.JPG"
+                                                                            mimeType:@"image/jpeg"];
+    } error:nil];
     
-    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+    // 上传文件
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request
+                                                                       progress:&progress
+                                                              completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"Error: %@", error);
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-            
-            NSArray *array = [((NSDictionary *)responseObject) objectForKey:@"data"];
-            ;
-            
-            NSString *img = [((NSDictionary *)[array objectAtIndex:0]) objectForKey:@"_id"];
-            NSLog(@"image : %@", img);
-            
-            
-            // AFHTTPSessionManagerを利用して、http://localhost/test.jsonからJSONデータを取得する
-            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-            manager.requestSerializer = [AFJSONRequestSerializer serializer];
-            
-//            NSMutableDictionary *content = [NSMutableDictionary dictionary];
-//            [content setValue:@"title" forKey:@"title"];
-//            [content setValue:@"messagemessagemessagemessagemessagemessagemessagemessage" forKey:@"message"];
-//            [content setValue:img forKey:@"image"];
-            
-            NSDictionary *content = @{@"title": @"title", @"message" :@"messagemessagemessagemessagemessagemessagemessagemessage", @"image": img };
-            
-//            NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//            [params setValue:content forKey:@"data"];
-            
-            NSDictionary *params = @{@"data": content};
-            
-            
-            [manager POST:[self appendCsrf:@"http://10.0.1.18:5001/shot/add"]
-               parameters:params
-                  success:^(NSURLSessionDataTask *task, id responseObject) {
-                      // 通信に成功した場合の処理
-                      NSLog(@"responseObject: %@", responseObject);
-                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      // エラーの場合はエラーの内容をコンソールに出力する
-                      NSLog(@"Error: %@", error);
-                  }];
-            
+            [ABHelper showError:error.description];
+            return;
         }
+
+        NSArray *array = [((NSDictionary *)responseObject) objectForKey:@"data"];
+        NSString *imageId = [((NSDictionary *)[array objectAtIndex:0]) objectForKey:@"_id"];
+        [self uploadShot:imageId];
     }];
     
     [uploadTask resume];
+}
+
+// 上传内容
+- (void) uploadShot:(NSString *)image
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+
+    [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:@"" parameters:nil error:nil];
     
+    // 生成参数
+    NSDictionary *content = @{ @"title": title,
+                               @"message": message,
+                               @"image": image,
+                               @"tag": @[self.barTag.title]};
+    NSDictionary *data = @{ @"data": content };
+    
+    // 上传
+    [manager POST:[ABHelper urlWithToken:@"/shot/add" params:nil]
+       parameters:data
+          success:^(NSURLSessionDataTask *task, id responseObject) {
+              [ABHelper showInfo:@"报告成功"];
+          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+              NSLog(@"Error: %@", error);
+              [ABHelper showError:error.description];
+          }];
+}
+
+// 校验输入内容
+- (BOOL) isValid
+{
+    if (title.length <= 0) {
+        [ABHelper showError:@"请填写标题"];
+        return NO;
+    }
+    if (message.length <= 0) {
+        [ABHelper showError:@"请填写注释"];
+        return NO;
+    }
+    if (self.imgAttach.isImageSelected == NO) {
+        [ABHelper showError:@"请指定照片"];
+        return NO;
+    }
+    
+    return YES;
+}
+
+// 图片保存
+-(void)imagePickerController:(UIImagePickerController *)picker
+       didFinishPickingImage:(UIImage *)image
+                 editingInfo:(NSDictionary *)editingInfo
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.imgAttach.image = image;
+    self.imgAttach.isImageSelected = YES;
+    
+    [DAStorable store:image withKey:kStorableKeyOriginalImage];
 }
 
 - (IBAction)firstViewReturnActionForSegue:(UIStoryboardSegue *)segue
 {
-    NSLog(@"First view return action invoked.");
 }
 
+// 显示注释画面
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    ABCommentViewController *nvc = (ABCommentViewController*)[segue destinationViewController];
-    nvc.onComplet = ^(NSString *comment){
-        NSLog(@"%@", comment);
+    ABCommentViewController *viewController = (ABCommentViewController*)[segue destinationViewController];
+    viewController.text = title;
+    viewController.message = message;
+    viewController.onComplet = ^(NSString *t, NSString *m){
+        title = t;
+        message = m;
     };
 }
 
-- (IBAction)onCategoryClicked:(id)sender
+// 选中标签
+- (void) tagItemAction:(id)sender
 {
-    NSLog(@"asdfasdfs");
-    
-    CGRect aRect = CGRectMake(0, 54, 320, 1);
-    
-    
-    NSArray *menuItems =
-    @[
-      [KxMenuItem menuItem:@"Share this"
-                     image:[UIImage imageNamed:@"price-tag-small.png"]
-                    target:self
-                    action:@selector(menuItemAction:)],
-      
-      [KxMenuItem menuItem:@"Check menu"
-                     image:[UIImage imageNamed:@"price-tag-small.png"]
-                    target:self
-                    action:@selector(menuItemAction:)],
-      
-      [KxMenuItem menuItem:@"Reload page"
-                     image:[UIImage imageNamed:@"price-tag-small.png"]
-                    target:self
-                    action:@selector(menuItemAction:)],
-      
-      [KxMenuItem menuItem:@"Search"
-                     image:[UIImage imageNamed:@"price-tag-small.png"]
-                    target:self
-                    action:@selector(menuItemAction:)],
-      
-      [KxMenuItem menuItem:@"Go home"
-                     image:[UIImage imageNamed:@"price-tag-small.png"]
-                    target:self
-                    action:@selector(menuItemAction:)]
-      ];
-    
-//    KxMenuItem *first = menuItems[0];
-//    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-//    first.alignment = NSTextAlignmentCenter;
-    
-    [KxMenu showMenuInView:self.view
-                  fromRect:aRect
-                 menuItems:menuItems];
+    KxMenuItem *tag = (KxMenuItem *)sender;
+    self.barTag.title = tag.title;
 }
 
-- (void) menuItemAction:(id)sender
+// 初始化标签一览
+- (void) initMenu:(NSArray *)items
 {
-    NSLog(@"%@", sender);
+    taglist = [[NSMutableArray alloc] init];
+    for (Tag *tag in items) {
+        KxMenuItem* item = [KxMenuItem menuItem:tag.name
+                                          image:[UIImage imageNamed:@"price-tag-small.png"]
+                                         target:self
+                                         action:@selector(tagItemAction:)];
+        [taglist addObject:item];
+    }
 }
-
 
 @end

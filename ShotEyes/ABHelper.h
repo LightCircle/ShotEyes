@@ -7,11 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <DAConfigManager.h>
 
 @interface ABHelper : NSObject
 
 + (void) showError:(NSString *)message;
++ (void)showInfo:(NSString *)message;
 
 + (NSString *) url:(NSString *)path params:(NSString *)params;
++ (NSString *) urlWithToken:(NSString *)path params:(NSString *)params;
++ (NSString*) encode:(NSString *)string;
+
++ (void)fetchTag:(void (^)())callback;
 
 @end
