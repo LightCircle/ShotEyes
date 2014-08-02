@@ -2,11 +2,12 @@
 //  ABSettingViewController.m
 //  ShotEyes
 //
-//  Created by LI LIN on 14-7-31.
+//  Created by LI LIN on 14-8-1.
 //  Copyright (c) 2014年 Alphabets. All rights reserved.
 //
 
 #import "ABSettingViewController.h"
+#import "ABSettingViewCell.h"
 
 @interface ABSettingViewController ()
 
@@ -14,9 +15,9 @@
 
 @implementation ABSettingViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -26,12 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,71 +35,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
@@ -115,5 +46,60 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 2;
+    }
+    
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = @"ABSettingViewCell";
+	ABSettingViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.imgIcon.image = [UIImage imageNamed:@"table_satellite-dish.png"];
+            cell.lblTitle.text = @"地址";
+            cell.lblValue.text = @"127.0.0.1";
+        }
+        if (indexPath.row == 1) {
+            cell.imgIcon.image = [UIImage imageNamed:@"table_lightbulb.png"];
+            cell.lblTitle.text = @"端口";
+            cell.lblValue.text = @"3000";
+        }
+    }
+    
+    if (indexPath.section == 1) {
+        cell.imgIcon.image = [UIImage imageNamed:@"table_entrance.png"];
+        cell.lblTitle.text = @"注销";
+        cell.lblValue.text = @"";
+    }
+    
+    if (indexPath.section == 2) {
+        cell.imgIcon.image = [UIImage imageNamed:@"table_anchor.png"];
+        cell.lblTitle.text = @"版本信息";
+        cell.lblValue.text = @"v1.0.0";
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        NSLog(@"--------");
+    }
+}
+
 
 @end

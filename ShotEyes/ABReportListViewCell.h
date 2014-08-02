@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface ABReportListViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *txtTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *imgShot;
+@property (weak, nonatomic) IBOutlet UILabel *txtMessage;
+@property (weak, nonatomic) IBOutlet UILabel *txtAt;
+@property (weak, nonatomic) IBOutlet UILabel *txtTag;
 
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "ABLoginViewController.h"
+#import <AFHTTPSessionManager.h>
+#import "Entities.h"
+#import <DAConfigManager.h>
 
 @interface ABLoginViewController ()
 
@@ -48,28 +51,42 @@
 
 
 
-//AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//
-//[manager GET:@"http://127.0.0.1:5001/login?name=admin&password=admin"
-//  parameters:nil
-//     success:^(NSURLSessionDataTask *task, id responseObject) {
-//         
-//         NSDictionary *aaa = responseObject[@"data"];
-//         NSLog(@"responseObject: %@", [aaa objectForKey:@"createAt"]);
-//         
-//         User *a = [[User alloc] initWithDictionary:aaa];
-//         
-//         NSLog(@"responseObject: %@", a._id);
-//         
-//         NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
-//         NSLog(@"%@" ,[r allHeaderFields]);
-//         
-//         
-//         
-//     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//         
-//         NSLog(@"Error: %@", error);
-//     }];
+#define kHTTPHeaderCookieName   @"Set-Cookie"
+#define kHTTPHeaderCsrftoken    @"csrftoken"
 
+- (IBAction)onLoginClicked:(id)sender
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+
+    [manager GET:@"http://10.0.1.18:5001/login?name=admin&password=admin"
+      parameters:nil
+         success:^(NSURLSessionDataTask *task, id responseObject) {
+
+             NSDictionary *aaa = responseObject[@"data"];
+             NSLog(@"responseObject: %@", [aaa objectForKey:@"createAt"]);
+
+             User *a = [[User alloc] initWithDictionary:aaa];
+
+             NSLog(@"responseObject: %@", a._id);
+
+             NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
+             NSLog(@"%@" ,[r allHeaderFields]);
+             
+             
+             NSString *cookie = [DAConfigManager.defaults objectForKey:kHTTPHeaderCookieName];
+             NSString *csrftoken = [DAConfigManager.defaults objectForKey:kHTTPHeaderCsrftoken];
+             NSLog(@"cookie: %@", cookie);
+             NSLog(@"csrftoken: %@", csrftoken);
+
+             [DAConfigManager.defaults setObject:[[r allHeaderFields] objectForKey:kHTTPHeaderCookieName] forKey:kHTTPHeaderCookieName];
+             [DAConfigManager.defaults setObject:[[r allHeaderFields] objectForKey:kHTTPHeaderCsrftoken] forKey:kHTTPHeaderCsrftoken];
+             
+             [self.view removeFromSuperview];
+
+         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+             
+             NSLog(@"Error: %@", error);
+         }];
+}
 @end

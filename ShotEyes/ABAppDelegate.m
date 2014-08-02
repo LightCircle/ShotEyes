@@ -7,11 +7,13 @@
 //
 
 #import "ABAppDelegate.h"
+#import <DAConfigManager.h>
 
 @implementation ABAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [DAConfigManager initWithPlistFile:nil];
     // Override point for customization after application launch.
     return YES;
 }

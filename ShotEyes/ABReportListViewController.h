@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ABReportListViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITableView *tblShotList;
 
 @end
