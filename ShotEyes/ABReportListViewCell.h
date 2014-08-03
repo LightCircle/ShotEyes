@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtMessage;
 @property (weak, nonatomic) IBOutlet UILabel *txtAt;
 @property (weak, nonatomic) IBOutlet UILabel *txtTag;
+@property (weak, nonatomic) NSString *messageId;
 
 @end

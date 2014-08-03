@@ -8,6 +8,7 @@
 
 #import "ABReportListViewController.h"
 #import "ABReportListViewCell.h"
+#import "ABReportDetailViewController.h"
 
 #define kTagALL @"全部"
 
@@ -84,7 +85,8 @@
     cell.txtTitle.text = shot.title;
     cell.txtMessage.text = shot.message;
     cell.txtAt.text = [ABHelper stringFromISODateString:shot.updateAt];
-    cell.txtTag.text = [shot.tag componentsJoinedByString:@","];;
+    cell.txtTag.text = [shot.tag componentsJoinedByString:@","];
+    cell.messageId = shot._id;
     
     NSString *url = [ABHelper url:[@"/file/" stringByAppendingString:shot.image] params:nil];
     [cell.imgShot sd_setImageWithURL:[NSURL URLWithString:url]
@@ -152,6 +154,18 @@
     [KxMenu showMenuInView:self.view
                   fromRect:CGRectMake(0, 54, 320, 1)
                  menuItems:taglist];
+}
+
+- (IBAction)firstViewReturnActionForSegue:(UIStoryboardSegue *)segue
+{
+}
+
+// 显示注释画面
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    ABReportDetailViewController *viewController = (ABReportDetailViewController*)[segue destinationViewController];
+    ABReportListViewCell *cell = (ABReportListViewCell *)sender;
+    viewController.messageid = cell.messageId;
 }
 
 @end

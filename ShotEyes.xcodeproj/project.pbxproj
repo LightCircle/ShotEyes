@@ -89,6 +89,9 @@
 		F2383DAF1987FBE500527F44 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2383D8E1987FBE500527F44 /* UIKit.framework */; };
 		F2383DB71987FBE500527F44 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2383DB51987FBE500527F44 /* InfoPlist.strings */; };
 		F2383DB91987FBE500527F44 /* ShotEyesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2383DB81987FBE500527F44 /* ShotEyesTests.m */; };
+		F23D1EA8198E927000C94B03 /* ABReportDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23D1EA7198E927000C94B03 /* ABReportDetailViewController.m */; };
+		F23D1EAB198E954700C94B03 /* business-woman.png in Resources */ = {isa = PBXBuildFile; fileRef = F23D1EA9198E954700C94B03 /* business-woman.png */; };
+		F23D1EAC198E954700C94B03 /* business-woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F23D1EAA198E954700C94B03 /* business-woman@2x.png */; };
 		F25EEBA5198CA53B000DBD89 /* ABHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F25EEBA4198CA53B000DBD89 /* ABHelper.m */; };
 		F25EEBAD198D6AA2000DBD89 /* WTStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F25EEBA8198D6AA2000DBD89 /* WTStatusBar.m */; };
 		F25EEBAE198D6AA2000DBD89 /* WTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F25EEBAA198D6AA2000DBD89 /* WTStatusView.m */; };
@@ -208,6 +211,10 @@
 		F2383DB41987FBE500527F44 /* ShotEyesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShotEyesTests-Info.plist"; sourceTree = "<group>"; };
 		F2383DB61987FBE500527F44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F2383DB81987FBE500527F44 /* ShotEyesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShotEyesTests.m; sourceTree = "<group>"; };
+		F23D1EA6198E927000C94B03 /* ABReportDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABReportDetailViewController.h; sourceTree = "<group>"; };
+		F23D1EA7198E927000C94B03 /* ABReportDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABReportDetailViewController.m; sourceTree = "<group>"; };
+		F23D1EA9198E954700C94B03 /* business-woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "business-woman.png"; sourceTree = "<group>"; };
+		F23D1EAA198E954700C94B03 /* business-woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "business-woman@2x.png"; sourceTree = "<group>"; };
 		F25EEBA3198CA53B000DBD89 /* ABHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABHelper.h; sourceTree = "<group>"; };
 		F25EEBA4198CA53B000DBD89 /* ABHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABHelper.m; sourceTree = "<group>"; };
 		F25EEBA7198D6AA2000DBD89 /* WTStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTStatusBar.h; sourceTree = "<group>"; };
@@ -261,6 +268,8 @@
 		F20BA13E19895F32003EE65C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F23D1EA9198E954700C94B03 /* business-woman.png */,
+				F23D1EAA198E954700C94B03 /* business-woman@2x.png */,
 				F2BB2A52198DEB9500A7651B /* Icon.png */,
 				F2BB2A53198DEB9500A7651B /* Icon@2x.png */,
 				F20BA1FF198C94B3003EE65C /* noimage.png */,
@@ -400,6 +409,8 @@
 				F20BA1C2198A8890003EE65C /* ABCommentViewController.m */,
 				F20BA198198A57C2003EE65C /* ABReportListViewController.h */,
 				F20BA199198A57C2003EE65C /* ABReportListViewController.m */,
+				F23D1EA6198E927000C94B03 /* ABReportDetailViewController.h */,
+				F23D1EA7198E927000C94B03 /* ABReportDetailViewController.m */,
 				F20BA1BA198A76FC003EE65C /* ABReportListViewCell.h */,
 				F20BA1BB198A76FC003EE65C /* ABReportListViewCell.m */,
 				F20BA1E4198B91F7003EE65C /* ABSettingViewController.h */,
@@ -565,6 +576,7 @@
 				F20BA1F6198C8FBB003EE65C /* price-tag-small@2x.png in Resources */,
 				F20BA1B5198A6570003EE65C /* table_satellite-dish@2x.png in Resources */,
 				F20BA1B4198A6570003EE65C /* table_satellite-dish.png in Resources */,
+				F23D1EAC198E954700C94B03 /* business-woman@2x.png in Resources */,
 				F20BA1D3198AA9CD003EE65C /* write-7.png in Resources */,
 				F20BA1521989619B003EE65C /* clipboard-mini@2x.png in Resources */,
 				F20BA186198A5128003EE65C /* big-tick@2x.png in Resources */,
@@ -582,6 +594,7 @@
 				F20BA14E1989612D003EE65C /* arrow-circle-up-mini@2x.png in Resources */,
 				F20BA181198A5103003EE65C /* photo.png in Resources */,
 				F20BA14819895F32003EE65C /* photo-album@2x.png in Resources */,
+				F23D1EAB198E954700C94B03 /* business-woman.png in Resources */,
 				F20BA1A9198A6523003EE65C /* table_anchor@2x.png in Resources */,
 				F20BA194198A5449003EE65C /* photo_back_all.png in Resources */,
 				F20BA182198A5103003EE65C /* photo@2x.png in Resources */,
@@ -656,6 +669,7 @@
 				F20BA1A0198A59D5003EE65C /* ABLoginViewController.m in Sources */,
 				F20BA13D1988038B003EE65C /* Entities.m in Sources */,
 				F20BA1E6198B91F7003EE65C /* ABSettingViewController.m in Sources */,
+				F23D1EA8198E927000C94B03 /* ABReportDetailViewController.m in Sources */,
 				F2383D9B1987FBE500527F44 /* ABAppDelegate.m in Sources */,
 				F25EEBAD198D6AA2000DBD89 /* WTStatusBar.m in Sources */,
 				F25EEBA5198CA53B000DBD89 /* ABHelper.m in Sources */,
