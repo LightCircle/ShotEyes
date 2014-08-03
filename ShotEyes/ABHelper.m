@@ -69,6 +69,11 @@
 
 + (void)fetchTag:(void (^)())callback
 {
+    NSString *user = [DAConfigManager.defaults objectForKey:kConfigManagerUserID];
+    if (user == nil) {
+        return;
+    }
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:[ABHelper url:@"/tag/list" params:nil]

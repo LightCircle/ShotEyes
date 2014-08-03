@@ -8,6 +8,7 @@
 
 #import "ABReportViewController.h"
 #import "ABCommentViewController.h"
+#import "WTStatusBar.h"
 
 #define kTagNone @"选择分类"
 
@@ -46,8 +47,7 @@
     // 设定绘图笔颜色
     self.imgAttach.penBold = [NSNumber numberWithFloat:5.0f];
     self.imgAttach.penColor = [UIColor redColor];
-    
-    
+
     TagList *list = [DAStorable loadByKey:kStorableKeyTagList];
     if (list == nil) {
         
@@ -60,6 +60,11 @@
         // 初始化Tag菜单
         [self initMenu:list.items];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,6 +106,11 @@
 // 选择标签
 - (IBAction)onCategoryClicked:(id)sender
 {
+    if (taglist == nil) {
+        TagList *list = [DAStorable loadByKey:kStorableKeyTagList];
+        [self initMenu:list.items];
+    }
+    
     [KxMenu showMenuInView:self.view
                   fromRect:CGRectMake(0, 54, 320, 1)
                  menuItems:taglist];
@@ -142,12 +152,34 @@
             return;
         }
 
+        [WTStatusBar clearStatusAnimated:YES];
         NSArray *array = [((NSDictionary *)responseObject) objectForKey:@"data"];
         NSString *imageId = [((NSDictionary *)[array objectAtIndex:0]) objectForKey:@"_id"];
+
         [self uploadShot:imageId];
     }];
     
     [uploadTask resume];
+    
+    // 在状态栏显示进度， UI的更新需在主线程中进行
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [WTStatusBar setStatusText:@"uploading..." animated:YES];
+    });
+    [progress addObserver:self
+               forKeyPath:@"fractionCompleted"
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+}
+
+// 显示进度
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"fractionCompleted"]) {
+        NSProgress *progress = (NSProgress *)object;
+        [WTStatusBar setProgress:progress.fractionCompleted animated:YES];
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 // 上传内容

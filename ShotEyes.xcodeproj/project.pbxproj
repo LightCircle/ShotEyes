@@ -90,6 +90,11 @@
 		F2383DB71987FBE500527F44 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2383DB51987FBE500527F44 /* InfoPlist.strings */; };
 		F2383DB91987FBE500527F44 /* ShotEyesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2383DB81987FBE500527F44 /* ShotEyesTests.m */; };
 		F25EEBA5198CA53B000DBD89 /* ABHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F25EEBA4198CA53B000DBD89 /* ABHelper.m */; };
+		F25EEBAD198D6AA2000DBD89 /* WTStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F25EEBA8198D6AA2000DBD89 /* WTStatusBar.m */; };
+		F25EEBAE198D6AA2000DBD89 /* WTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F25EEBAA198D6AA2000DBD89 /* WTStatusView.m */; };
+		F25EEBAF198D6AA2000DBD89 /* WTStatusWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F25EEBAC198D6AA2000DBD89 /* WTStatusWindow.m */; };
+		F2BB2A54198DEB9500A7651B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BB2A52198DEB9500A7651B /* Icon.png */; };
+		F2BB2A55198DEB9500A7651B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BB2A53198DEB9500A7651B /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +210,14 @@
 		F2383DB81987FBE500527F44 /* ShotEyesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShotEyesTests.m; sourceTree = "<group>"; };
 		F25EEBA3198CA53B000DBD89 /* ABHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABHelper.h; sourceTree = "<group>"; };
 		F25EEBA4198CA53B000DBD89 /* ABHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABHelper.m; sourceTree = "<group>"; };
+		F25EEBA7198D6AA2000DBD89 /* WTStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTStatusBar.h; sourceTree = "<group>"; };
+		F25EEBA8198D6AA2000DBD89 /* WTStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTStatusBar.m; sourceTree = "<group>"; };
+		F25EEBA9198D6AA2000DBD89 /* WTStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTStatusView.h; sourceTree = "<group>"; };
+		F25EEBAA198D6AA2000DBD89 /* WTStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTStatusView.m; sourceTree = "<group>"; };
+		F25EEBAB198D6AA2000DBD89 /* WTStatusWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTStatusWindow.h; sourceTree = "<group>"; };
+		F25EEBAC198D6AA2000DBD89 /* WTStatusWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTStatusWindow.m; sourceTree = "<group>"; };
+		F2BB2A52198DEB9500A7651B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		F2BB2A53198DEB9500A7651B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +261,8 @@
 		F20BA13E19895F32003EE65C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F2BB2A52198DEB9500A7651B /* Icon.png */,
+				F2BB2A53198DEB9500A7651B /* Icon@2x.png */,
 				F20BA1FF198C94B3003EE65C /* noimage.png */,
 				F20BA1FB198C91C3003EE65C /* arrow-simple.png */,
 				F20BA1FC198C91C3003EE65C /* arrow-simple@2x.png */,
@@ -308,6 +323,7 @@
 		F20BA1EA198BD4AD003EE65C /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				F25EEBA6198D6AA2000DBD89 /* WTStatusBar */,
 				F20BA1EB198BD4AD003EE65C /* KxMenu */,
 			);
 			path = Thirdparty;
@@ -423,6 +439,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F25EEBA6198D6AA2000DBD89 /* WTStatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				F25EEBA7198D6AA2000DBD89 /* WTStatusBar.h */,
+				F25EEBA8198D6AA2000DBD89 /* WTStatusBar.m */,
+				F25EEBA9198D6AA2000DBD89 /* WTStatusView.h */,
+				F25EEBAA198D6AA2000DBD89 /* WTStatusView.m */,
+				F25EEBAB198D6AA2000DBD89 /* WTStatusWindow.h */,
+				F25EEBAC198D6AA2000DBD89 /* WTStatusWindow.m */,
+			);
+			path = WTStatusBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -523,6 +552,7 @@
 				F20BA1CF198AA95F003EE65C /* cloud-upload-7.png in Resources */,
 				F20BA1A8198A6523003EE65C /* table_anchor.png in Resources */,
 				F2383D9E1987FBE500527F44 /* Main_iPhone.storyboard in Resources */,
+				F2BB2A55198DEB9500A7651B /* Icon@2x.png in Resources */,
 				F20BA1511989619B003EE65C /* clipboard-mini.png in Resources */,
 				F20BA1BF198A8842003EE65C /* arrow-enter-left-mini.png in Resources */,
 				F20BA1DC198AAAB7003EE65C /* aperture-7@2x.png in Resources */,
@@ -558,6 +588,7 @@
 				F20BA1B9198A6B9B003EE65C /* price-tag@2x.png in Resources */,
 				F20BA18E198A51AB003EE65C /* note-write@2x.png in Resources */,
 				F20BA17F198A5103003EE65C /* aperture.png in Resources */,
+				F2BB2A54198DEB9500A7651B /* Icon.png in Resources */,
 				F20BA18D198A51AB003EE65C /* note-write.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,14 +644,17 @@
 				F20BA1E3198B2CCF003EE65C /* ABMainViewController.m in Sources */,
 				F20BA1C3198A8890003EE65C /* ABCommentViewController.m in Sources */,
 				F20BA1E9198B9395003EE65C /* ABSettingViewCell.m in Sources */,
+				F25EEBAE198D6AA2000DBD89 /* WTStatusView.m in Sources */,
 				F20BA1C6198A9E1A003EE65C /* ABCanvasImageView.m in Sources */,
 				F2383D971987FBE500527F44 /* main.m in Sources */,
+				F25EEBAF198D6AA2000DBD89 /* WTStatusWindow.m in Sources */,
 				F20BA19A198A57C2003EE65C /* ABReportListViewController.m in Sources */,
 				F20BA197198A579D003EE65C /* ABReportViewController.m in Sources */,
 				F20BA1A0198A59D5003EE65C /* ABLoginViewController.m in Sources */,
 				F20BA13D1988038B003EE65C /* Entities.m in Sources */,
 				F20BA1E6198B91F7003EE65C /* ABSettingViewController.m in Sources */,
 				F2383D9B1987FBE500527F44 /* ABAppDelegate.m in Sources */,
+				F25EEBAD198D6AA2000DBD89 /* WTStatusBar.m in Sources */,
 				F25EEBA5198CA53B000DBD89 /* ABHelper.m in Sources */,
 				F20BA1BC198A76FC003EE65C /* ABReportListViewCell.m in Sources */,
 				F20BA1EE198BD4AD003EE65C /* KxMenu.m in Sources */,
