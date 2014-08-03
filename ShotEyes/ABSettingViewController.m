@@ -87,7 +87,7 @@
     if (indexPath.section == 2) {
         cell.imgIcon.image = [UIImage imageNamed:@"table_anchor.png"];
         cell.lblTitle.text = @"版本信息";
-        cell.lblValue.text = @"v1.0.0";
+        cell.lblValue.text = [DAConfigManager.defaults objectForKey:@"CFBundleVersion"];
     }
     
     return cell;
