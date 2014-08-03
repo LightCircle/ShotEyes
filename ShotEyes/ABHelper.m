@@ -91,4 +91,25 @@
          }];
 }
 
++ (NSDate *) dateFromISODateString:(NSString *)isodate
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.zzz'Z'"];
+    return [dateFormatter dateFromString:isodate];
+}
+
++ (NSString *) stringFromISODate:(NSDate *)isodate
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MM/dd HH:mm"];
+    return [format stringFromDate:isodate];
+}
+
++ (NSString *) stringFromISODateString:(NSString *)isodate
+{
+    NSDate *date = [ABHelper dateFromISODateString:isodate];
+    return [ABHelper stringFromISODate:date];
+}
+
+
 @end

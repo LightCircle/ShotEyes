@@ -20,4 +20,8 @@
 
 + (void)fetchTag:(void (^)())callback;
 
++ (NSDate *) dateFromISODateString:(NSString *)isodate;
++ (NSString *) stringFromISODate:(NSDate *)isodate;
++ (NSString *) stringFromISODateString:(NSString *)isodate;
+
 @end

@@ -83,12 +83,8 @@
     Shot *shot = [list objectAtIndex:indexPath.row];
     cell.txtTitle.text = shot.title;
     cell.txtMessage.text = shot.message;
-    
-    NSString *tagList = @"";
-    for (NSString *tag in shot.tag) {
-        tagList = [NSString stringWithFormat:@"%@, %@", tagList, tag];
-    }
-    cell.txtTag.text = tagList;
+    cell.txtAt.text = [ABHelper stringFromISODateString:shot.updateAt];
+    cell.txtTag.text = [shot.tag componentsJoinedByString:@","];;
     
     NSString *url = [ABHelper url:[@"/file/" stringByAppendingString:shot.image] params:nil];
     [cell.imgShot sd_setImageWithURL:[NSURL URLWithString:url]
