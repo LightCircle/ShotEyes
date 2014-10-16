@@ -131,7 +131,7 @@
     // 生成上传用Request
     AFHTTPRequestSerializer *serial = [AFHTTPRequestSerializer serializer];
     NSMutableURLRequest *request = [serial multipartFormRequestWithMethod:@"POST"
-                                                                URLString:[ABHelper urlWithToken:@"/file/upload" params:nil]
+                                                                URLString:[ABHelper urlWithToken:@"/file/create" params:nil]
                                                                parameters:nil
                                                 constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                    

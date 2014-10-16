@@ -88,7 +88,7 @@
     cell.txtTag.text = [shot.tag componentsJoinedByString:@","];
     cell.messageId = shot._id;
     
-    NSString *url = [ABHelper url:[@"/file/" stringByAppendingString:shot.image] params:nil];
+    NSString *url = [ABHelper url:[@"/file/download/" stringByAppendingString:shot.image] params:nil];
     [cell.imgShot sd_setImageWithURL:[NSURL URLWithString:url]
                     placeholderImage:[UIImage imageNamed:@"noimage.png"]
                              options:SDWebImageHandleCookies];

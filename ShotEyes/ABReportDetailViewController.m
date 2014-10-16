@@ -63,7 +63,7 @@
              self.lblTag.text = [shot.tag componentsJoinedByString:@","];
              self.lblAt.text = [ABHelper stringFromISODateString:shot.updateAt];
 
-             NSString *url = [ABHelper url:[@"/file/" stringByAppendingString:shot.image] params:nil];
+             NSString *url = [ABHelper url:[@"/file/download/" stringByAppendingString:shot.image] params:nil];
              [self.imgShot sd_setImageWithURL:[NSURL URLWithString:url]
                              placeholderImage:[UIImage imageNamed:@"noimage.png"]
                                       options:SDWebImageHandleCookies];
