@@ -24,19 +24,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self.userInteractionEnabled = YES;
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
@@ -70,7 +61,7 @@
     
     // 描画領域をcanvasの大きさで生成
     UIGraphicsBeginImageContext(self.frame.size);
-    [self.image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    [self.image drawInRect:[self rect]];
     
     // 線の角を丸くする
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
@@ -98,6 +89,18 @@
     UIGraphicsEndImageContext();
     
     _touchPoint = currentPoint;
+}
+
+- (CGRect)rect
+{
+    float widthRatio = self.bounds.size.width / self.image.size.width;
+    float heightRatio = self.bounds.size.height / self.image.size.height;
+    float scale = MIN(widthRatio, heightRatio);
+    float width = scale * self.image.size.width;
+    float height = scale * self.image.size.height;
+    float y = (self.bounds.size.height - height) / 2;
+    float x = (self.bounds.size.width - width) / 2;
+    return CGRectMake(x, y, width, height);
 }
 
 @end

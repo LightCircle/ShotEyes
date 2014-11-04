@@ -2,7 +2,7 @@
 //  ABSettingViewCell.h
 //  ShotEyes
 //
-//  Created by LI LIN on 14-8-1.
+//  Created by LI LIN on 14/10/29.
 //  Copyright (c) 2014年 Alphabets. All rights reserved.
 //
 
@@ -12,5 +12,4 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblValue;
-
 @end

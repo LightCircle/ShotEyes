@@ -2,34 +2,23 @@
 //  ABSettingViewController.m
 //  ShotEyes
 //
-//  Created by LI LIN on 14-8-1.
+//  Created by LI LIN on 14/10/29.
 //  Copyright (c) 2014年 Alphabets. All rights reserved.
 //
 
 #import "ABSettingViewController.h"
 #import "ABSettingViewCell.h"
+#import "Header.h"
 
 @interface ABSettingViewController ()
-
-@property (weak, nonatomic) IBOutlet UITableView *tblSetting;
 
 @end
 
 @implementation ABSettingViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // TODO: 从设定文件里读取IP，端口
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,38 +45,38 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = @"ABSettingViewCell";
-	ABSettingViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    ABSettingViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cell.imgIcon.image = [UIImage imageNamed:@"table_satellite-dish.png"];
+            cell.imgIcon.image = [UIImage imageNamed:@"radar-tower-7.png"];
             cell.lblTitle.text = @"地址";
-            cell.lblValue.text = [DAConfigManager.defaults objectForKey:kConfigManagerServerName];
+            cell.lblValue.text = [ABConfigManager.defaults objectForKey:kConfigManagerServerName];
         }
         if (indexPath.row == 1) {
-            cell.imgIcon.image = [UIImage imageNamed:@"table_lightbulb.png"];
+            cell.imgIcon.image = [UIImage imageNamed:@"lightbulb-7.png"];
             cell.lblTitle.text = @"端口";
-            cell.lblValue.text = [DAConfigManager.defaults objectForKey:kConfigManagerServerPort];
+            cell.lblValue.text = [ABConfigManager.defaults objectForKey:kConfigManagerServerPort];
         }
     }
     
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
-            cell.imgIcon.image = [UIImage imageNamed:@"arrow-small-27"];
+            cell.imgIcon.image = [UIImage imageNamed:@"arrow-repeat-two-7.png"];
             cell.lblTitle.text = @"更新分类";
             cell.lblValue.text = @"";
         }
         if (indexPath.row == 1) {
-            cell.imgIcon.image = [UIImage imageNamed:@"table_entrance.png"];
+            cell.imgIcon.image = [UIImage imageNamed:@"door-in-7.png"];
             cell.lblTitle.text = @"注销";
             cell.lblValue.text = @"";
         }
     }
     
     if (indexPath.section == 2) {
-        cell.imgIcon.image = [UIImage imageNamed:@"table_anchor.png"];
+        cell.imgIcon.image = [UIImage imageNamed:@"anchor-7.png"];
         cell.lblTitle.text = @"版本信息";
-        cell.lblValue.text = [DAConfigManager.defaults objectForKey:@"CFBundleVersion"];
+        cell.lblValue.text = [ABConfigManager.defaults objectForKey:@"CFBundleVersion"];
     }
     
     return cell;
@@ -97,18 +86,19 @@
 {
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
-            [ABHelper fetchTag:^(){
+            [Helper fetchTag:^(){
                 [ABHelper showInfo:@"更新成功"];
             }];
         }
         if (indexPath.row == 1) {
-            [DAConfigManager.defaults removeObjectForKey:kConfigManagerUserID];
-            [DAConfigManager.defaults removeObjectForKey:kConfigManagerCookie];
-            [DAConfigManager.defaults removeObjectForKey:kConfigManagerCsrfToken];
+            [ABConfigManager.defaults removeObjectForKey:kConfigManagerUserID];
+            [ABConfigManager.defaults removeObjectForKey:kConfigManagerCookie];
+            [ABConfigManager.defaults removeObjectForKey:kConfigManagerCsrfToken];
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kNotificationNameNeedsLogin object:nil]];
         }
     }
-}
 
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+}
 
 @end
