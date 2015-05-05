@@ -419,7 +419,7 @@
 				TargetAttributes = {
 					F28056C31A00981A007095A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = B6PZ43Z3Q2;
+						DevelopmentTeam = GZ2W775BC7;
 					};
 					F28056DF1A00981A007095A2 = {
 						CreatedOnToolsVersion = 6.1;
@@ -705,6 +705,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alphabets Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -724,6 +725,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alphabets Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
